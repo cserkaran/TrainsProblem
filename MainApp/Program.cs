@@ -13,9 +13,6 @@ namespace MainApp
         static void Main(string[] args)
         {
             Console.WriteLine("Enter input file path:");
-
-
-
             var filePath = Console.ReadLine();
 
             try
@@ -69,11 +66,13 @@ namespace MainApp
 
                 //6.The number of trips starting at C and ending at C with a maximum of 3 stops.
                 var CtoCTrips = railNetwork.TripCountForMaxNumberOfHops(C, C,3);
-                Console.WriteLine(" 6.The number of trips starting at C and ending at C with a maximum of 3 stops : " + CtoCTrips);
+                Console.WriteLine(" 6.The number of trips starting at C and ending at C with a maximum of 3 stops : " 
+                    + CtoCTrips.Routes.Count + ".The trips are " + CtoCTrips.ToString());
 
                 //7. The number of trips starting at A and ending at C with exactly 4 stops.
                 var AtoCTrips = railNetwork.TripCountForExactHops(A, C,4);
-                Console.WriteLine(" 7.The number of trips starting at A and ending at C with exactly 4 stops : " + AtoCTrips);
+                Console.WriteLine(" 7.The number of trips starting at A and ending at C with exactly 4 stops : " 
+                    + AtoCTrips.Routes.Count + ".The trips are " + AtoCTrips.ToString());
 
                 //8.The length of the shortest route (in terms of distance to travel) from A to C.
                 ShortestPath fromA = new ShortestPath(railNetwork, A);
@@ -84,7 +83,9 @@ namespace MainApp
                 Console.WriteLine(" 9.The length of the shortest route (in terms of distance to travel) from B to B : " + fromB.DistanceTo(B));
 
                 //10.The number of different routes from C to C with a distance of less than 30
-                Console.WriteLine(" 10.The number of different routes from C to C with a distance of less than 30 : " + railNetwork.TripsCountForMaxDistance(C, C, 30));
+                var CToCMaxDistanceTrips = railNetwork.TripsCountForMaxDistance(C, C, 30);
+                Console.WriteLine(" 10.The number of different routes from C to C with a distance of less than 30 : "
+                    + CToCMaxDistanceTrips.Routes.Count + ".The trips are " + CToCMaxDistanceTrips.ToString());
 
                 Console.WriteLine(Environment.NewLine + Environment.NewLine + "=============================================");
 
@@ -97,31 +98,6 @@ namespace MainApp
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
-        }
-
-        private static string PrintTrips(IEnumerable<IReadOnlyCollection<Route>> trips)
-        {
-            StringBuilder sb = new StringBuilder();
-            int count = 0;
-            foreach (var trip in trips)
-            {
-                var items = trip.ToList();
-                int i;
-                for(i = 0; i < items.Count - 1; i++)
-                {
-                    sb.Append(items[i].From.Name + " - ");
-                }
-
-                sb.Append(items[i].From.Name + " - " + items[i].To.Name);
-                count++;
-                if(count != trips.Count())
-                {
-                    sb.Append(" , ");
-                }
-            }
-
-            return sb.ToString();
-             
         }
     }
 }

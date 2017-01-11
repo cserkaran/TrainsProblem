@@ -26,6 +26,12 @@ namespace Kiwiland.Models
 
         #region Fields
 
+        /// <summary>
+        /// Gets the towns.
+        /// </summary>
+        /// <value>
+        /// The towns.
+        /// </value>
         public List<Town> Towns
         {
             get
@@ -107,17 +113,19 @@ namespace Kiwiland.Models
         /// <param name="to">To.</param>
         /// <param name="hops">The hops.</param>
         /// <returns></returns>
-        public int TripCountForExactHops(Town from,Town to,int hops)
+        public Trips TripCountForExactHops(Town from,Town to,int hops)
         {
+            List<List<Route>> trips = new List<List<Route>>();
+
             int count = 0;
             var routes = Routes(from);
             foreach(var route in routes)
             {
                 var processedRoutes = new List<Route>();
-                TripCountForHops(route, to, processedRoutes,hops,ref count);
+                TripCountForHops(route, to, processedRoutes,hops,trips,ref count);
             }
 
-            return count;
+            return new Trips(trips);
         }
 
         /// <summary>
@@ -127,13 +135,15 @@ namespace Kiwiland.Models
         /// <param name="to">To.</param>
         /// <param name="processedRoutes">The processed routes.</param>
         /// <param name="hops">The hops.</param>
+        /// <param name="trips">The trips.</param>
         /// <param name="count">The count.</param>
-        private void TripCountForHops(Route route, Town to, List<Route> processedRoutes, int hops, ref int count)
+        private void TripCountForHops(Route route, Town to, List<Route> processedRoutes, int hops, List<List<Route>> trips, ref int count)
         {
             processedRoutes.Add(route);
 
             if (route.To == to && hops == processedRoutes.Count)
             {
+                trips.Add(processedRoutes.ToList());
                 count++;
             }
             else
@@ -144,7 +154,7 @@ namespace Kiwiland.Models
                     var routes = Routes(from);
                     foreach (var r in routes)
                     {
-                        TripCountForHops(r, to, processedRoutes, hops, ref count);
+                        TripCountForHops(r, to, processedRoutes, hops, trips,ref count);
                         processedRoutes.Remove(r);
                     }
                 }
@@ -162,17 +172,18 @@ namespace Kiwiland.Models
         /// <param name="to">To.</param>
         /// <param name="maxHops">The maximum allowed hops.</param>
         /// <returns></returns>
-        public int TripCountForMaxNumberOfHops(Town from, Town to, int maxHops)
+        public Trips TripCountForMaxNumberOfHops(Town from, Town to, int maxHops)
         {
-            int count = 0;
+            List<List<Route>> trips = new List<List<Route>>();
+         
             var routes = Routes(from);
             foreach (var route in routes)
             {
                 var processedRoutes = new List<Route>();
-                TripCountForMaxNumberOfHops(route, to, processedRoutes, maxHops, ref count);
+                TripCountForMaxNumberOfHops(route, to, processedRoutes, maxHops,trips);
             }
 
-            return count;
+            return new Trips(trips);
         }
 
         /// <summary>
@@ -182,14 +193,15 @@ namespace Kiwiland.Models
         /// <param name="to">To.</param>
         /// <param name="processedRoutes">The processed routes.</param>
         /// <param name="maxHops">The maxHops.</param>
+        /// <param name="trips">The trips.</param>
         /// <param name="count">The count.</param>
-        private void TripCountForMaxNumberOfHops(Route route, Town to, List<Route> processedRoutes, int maxHops, ref int count)
+        private void TripCountForMaxNumberOfHops(Route route, Town to, List<Route> processedRoutes, int maxHops, List<List<Route>> trips)
         {
             processedRoutes.Add(route);
 
             if (route.To == to && maxHops >= processedRoutes.Count)
             {
-                count++;
+                trips.Add(processedRoutes.ToList());
             }
             else
             {
@@ -199,7 +211,7 @@ namespace Kiwiland.Models
                     var routes = Routes(from);
                     foreach (var r in routes)
                     {
-                        TripCountForMaxNumberOfHops(r, to, processedRoutes, maxHops, ref count);
+                        TripCountForMaxNumberOfHops(r, to, processedRoutes, maxHops, trips);
                     }
                 }
                 else
@@ -213,31 +225,47 @@ namespace Kiwiland.Models
 
         #region Trips Count For Max number of Hops 
 
-        
-        public int TripsCountForMaxDistance(Town from, Town to, int maxDistance)
+        /// <summary>
+        /// Calculates the count of the number of different routes from one town to another
+        /// with a total distance of less than the given maximum distance.
+        /// </summary>
+        /// <param name="from">From.</param>
+        /// <param name="to">To.</param>
+        /// <param name="maxDistance">The maximum distance.</param>
+        /// <returns></returns>
+        public Trips TripsCountForMaxDistance(Town from, Town to, int maxDistance)
         {
-            int count = 0;
+            List<List<Route>> trips = new List<List<Route>>();
             var runningSum = 0;
             var routes = Routes(from);
             foreach (var route in routes)
             {
                 runningSum = 0;
                 var processedRoutes = new List<Route>();
-                TripsCountForMaxDistance(route, to, processedRoutes, maxDistance,ref runningSum, ref count);
+                TripsCountForMaxDistance(route, to, processedRoutes, maxDistance,trips,ref runningSum);
             }
 
-            return count;
+            return new Trips(trips);
         }
 
-
+        /// <summary>
+        /// Calculates the count of the number of different routes from one town to another
+        /// with a total distance of less than the given maximum distance.
+        /// </summary>
+        /// <param name="route">The route.</param>
+        /// <param name="to">To.</param>
+        /// <param name="processedRoutes">The processed routes.</param>
+        /// <param name="maxDistance">The maximum distance.</param>
+        /// <param name="runningSum">The running sum.</param>
+        /// <param name="count">The count.</param>
         private void TripsCountForMaxDistance(Route route, Town to, List<Route> processedRoutes,
-                                            int maxDistance, ref int runningSum, ref int count)
+                                            int maxDistance, List<List<Route>> trips, ref int runningSum)
         {
             processedRoutes.Add(route);
             runningSum += route.Distance;
             if (route.To == to && runningSum < maxDistance)
             {
-                count++;
+                trips.Add(processedRoutes.ToList());
             }
 
             if (!(runningSum > maxDistance))
@@ -246,7 +274,7 @@ namespace Kiwiland.Models
                 var routes = Routes(from);
                 foreach (var r in routes)
                 {
-                    TripsCountForMaxDistance(r, to, processedRoutes, maxDistance, ref runningSum, ref count);
+                    TripsCountForMaxDistance(r, to, processedRoutes, maxDistance, trips,ref runningSum);
                     runningSum -= r.Distance;
                     RemoveAtLastIndex(r, processedRoutes);
                 }
