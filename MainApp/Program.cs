@@ -3,8 +3,6 @@ using Kiwiland.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace MainApp
 {
@@ -61,30 +59,30 @@ namespace MainApp
                 }
                 catch(Exception e)
                 {
-                    Console.WriteLine(" 5.The distance of the route A - E - D : " + e.Message);
+                    Console.WriteLine(" 5. The distance of the route A - E - D : " + e.Message);
                 }
 
                 //6.The number of trips starting at C and ending at C with a maximum of 3 stops.
                 var CtoCTrips = railNetwork.TripCountForMaxNumberOfHops(C, C,3);
-                Console.WriteLine(" 6.The number of trips starting at C and ending at C with a maximum of 3 stops : " 
+                Console.WriteLine(" 6. The number of trips starting at C and ending at C with a maximum of 3 stops : " 
                     + CtoCTrips.Routes.Count + ".The trips are " + CtoCTrips.ToString());
 
                 //7. The number of trips starting at A and ending at C with exactly 4 stops.
                 var AtoCTrips = railNetwork.TripCountForExactHops(A, C,4);
-                Console.WriteLine(" 7.The number of trips starting at A and ending at C with exactly 4 stops : " 
+                Console.WriteLine(" 7. The number of trips starting at A and ending at C with exactly 4 stops : " 
                     + AtoCTrips.Routes.Count + ".The trips are " + AtoCTrips.ToString());
 
                 //8.The length of the shortest route (in terms of distance to travel) from A to C.
                 ShortestPath fromA = new ShortestPath(railNetwork, A);
-                Console.WriteLine(" 8.The length of the shortest route (in terms of distance to travel) from A to C : " + fromA.DistanceTo(C));
+                Console.WriteLine(" 8. The length of the shortest route (in terms of distance to travel) from A to C : " + fromA.DistanceTo(C));
 
                 //9.The length of the shortest route (in terms of distance to travel) from B to B.
                 ShortestPath fromB = new ShortestPath(railNetwork, B);
-                Console.WriteLine(" 9.The length of the shortest route (in terms of distance to travel) from B to B : " + fromB.DistanceTo(B));
+                Console.WriteLine(" 9. The length of the shortest route (in terms of distance to travel) from B to B : " + fromB.DistanceTo(B));
 
                 //10.The number of different routes from C to C with a distance of less than 30
                 var CToCMaxDistanceTrips = railNetwork.TripsCountForMaxDistance(C, C, 30);
-                Console.WriteLine(" 10.The number of different routes from C to C with a distance of less than 30 : "
+                Console.WriteLine(" 10. The number of different routes from C to C with a distance of less than 30 : "
                     + CToCMaxDistanceTrips.Routes.Count + ".The trips are " + CToCMaxDistanceTrips.ToString());
 
                 Console.WriteLine(Environment.NewLine + Environment.NewLine + "=============================================");
