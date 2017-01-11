@@ -18,7 +18,7 @@ namespace Kiwiland.Algorithms
 
         #endregion
 
-        #region Public API
+        #region Public MinPQ API
 
         /// <summary>
         /// Inserts the specified key.

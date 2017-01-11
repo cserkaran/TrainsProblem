@@ -45,6 +45,11 @@ namespace Kiwiland.Algorithms
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortestPath"/> class.
+        /// </summary>
+        /// <param name="railNetwork">The rail network.</param>
+        /// <param name="from">From.</param>
         public ShortestPath(RailNetwork railNetwork, Town from)
         {
             _railNetwork = railNetwork;
@@ -81,7 +86,7 @@ namespace Kiwiland.Algorithms
         #region Relax the edges 
 
         /// <summary>
-        /// Relaxes the specified route and re-compute the shorter part to a given town
+        /// Relaxes the specified route and re-compute the shortest part to a given town
         /// if applicable.
         /// </summary>
         /// <param name="route">The route.</param>

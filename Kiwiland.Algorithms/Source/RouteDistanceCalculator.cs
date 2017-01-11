@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace Kiwiland.Algorithms
 {
+    /// <summary>
+    /// Calculate Distance between routes of towns. 
+    /// </summary>
     public class RouteDistanceCalculator
     {
         /// <summary>
