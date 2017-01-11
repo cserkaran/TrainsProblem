@@ -61,19 +61,25 @@ namespace Kiwiland.RouteTracker.Tests
             Assert.Equal("NO SUCH ROUTE", ex.Message);
 
             //6.The number of trips starting at C and ending at C with a maximum of 3 stops.
-         
-            var pathsToC = railNetwork.Trips(C,C);
+            var pathsFromCtoC = railNetwork.TripCountForMaxNumberOfHops(C, C,3);
+            Assert.Equal(2, pathsFromCtoC);
+
+            //7.The number of trips starting at A and ending at C with exactly 4 stops
+            var pathsFromAtoC = railNetwork.TripCountForExactHops(A, C, 4);
+            var pathsToCToC = railNetwork.TripCountForExactHops(C,C,4);
+            Assert.Equal(3, pathsFromAtoC);
+            Assert.Equal(2, pathsToCToC);
 
             //8.The length of the shortest route (in terms of distance to travel) from A to C.
             ShortestPath fromA = new ShortestPath(railNetwork, A);
             Assert.Equal(9, fromA.DistanceTo(C));
 
-            var pathsFromAtoC = railNetwork.Trips(A,C);
-
             //9.The length of the shortest route (in terms of distance to travel) from B to B.
             ShortestPath fromB = new ShortestPath(railNetwork, B);
             Assert.Equal(9, fromB.DistanceTo(B));
 
+            pathsFromCtoC = railNetwork.TripsCountForMaxDistance(C, C, 30);
+            Assert.Equal(7, fromB.DistanceTo(B));
         }
     }
 }

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiwiland.Models", "Kiwiland
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiwiland.Algorithms", "Kiwiland.Algorithms\Kiwiland.Algorithms.csproj", "{D3D2983C-6562-4195-AF92-0138F0DD5C6B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainApp", "MainApp\MainApp.csproj", "{E59D2371-D6C5-4512-9834-9015A9279B3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{D3D2983C-6562-4195-AF92-0138F0DD5C6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3D2983C-6562-4195-AF92-0138F0DD5C6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3D2983C-6562-4195-AF92-0138F0DD5C6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E59D2371-D6C5-4512-9834-9015A9279B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E59D2371-D6C5-4512-9834-9015A9279B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E59D2371-D6C5-4512-9834-9015A9279B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E59D2371-D6C5-4512-9834-9015A9279B3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,5 +45,6 @@ Global
 		{0F3E2608-B309-428D-8825-1A8C44C0ED14} = {963901FA-B829-45B7-892F-7BE356F60F4F}
 		{F62E1244-9A17-4A51-9921-B95460AA3C74} = {80B29E1A-E2B5-49FB-B392-ED29C33A44DE}
 		{D3D2983C-6562-4195-AF92-0138F0DD5C6B} = {80B29E1A-E2B5-49FB-B392-ED29C33A44DE}
+		{E59D2371-D6C5-4512-9834-9015A9279B3A} = {80B29E1A-E2B5-49FB-B392-ED29C33A44DE}
 	EndGlobalSection
 EndGlobal

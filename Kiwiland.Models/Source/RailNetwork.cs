@@ -26,11 +26,11 @@ namespace Kiwiland.Models
 
         #region Fields
 
-        public IEnumerable<Town> Towns
+        public List<Town> Towns
         {
             get
             {
-                return towns;
+                return towns.ToList();
             }
         }
 
@@ -98,56 +98,185 @@ namespace Kiwiland.Models
 
         #endregion
 
-        #region Trips between two towns
+        #region Trips Count For Exact number of Hops 
 
         /// <summary>
-        /// Gets the Possible trips from one town to another town.
+        /// Calculates the number of trips starting at from and ending at to with exactly hop number of stops.
         /// </summary>
         /// <param name="from">From.</param>
         /// <param name="to">To.</param>
+        /// <param name="hops">The hops.</param>
         /// <returns></returns>
-        public IReadOnlyCollection<IReadOnlyCollection<Route>> Trips(Town from,Town to)
+        public int TripCountForExactHops(Town from,Town to,int hops)
         {
-            var trips = new List<List<Route>>();
+            int count = 0;
             var routes = Routes(from);
-
-            HashSet<Route> traversed = new HashSet<Route>();
-
-            foreach (var route in routes)
+            foreach(var route in routes)
             {
-                Trips(route, trips, to, traversed);
-                traversed.Clear();
+                var processedRoutes = new List<Route>();
+                TripCountForHops(route, to, processedRoutes,hops,ref count);
             }
 
-            return trips;
+            return count;
         }
 
         /// <summary>
-        /// Calculate the Possible trips from one town to another town.
+        /// Calculates the number of trips starting at from and ending at to with exactly hop number of stops.
         /// </summary>
         /// <param name="route">The route.</param>
-        /// <param name="trips">The trips.</param>
         /// <param name="to">To.</param>
-        /// <param name="traversed">The traversed.</param>
-        public void Trips(Route route, List<List<Route>> trips, Town to, HashSet<Route> traversed)
+        /// <param name="processedRoutes">The processed routes.</param>
+        /// <param name="hops">The hops.</param>
+        /// <param name="count">The count.</param>
+        private void TripCountForHops(Route route, Town to, List<Route> processedRoutes, int hops, ref int count)
         {
-            if (!traversed.Contains(route))
+            processedRoutes.Add(route);
+
+            if (route.To == to && hops == processedRoutes.Count)
             {
-                traversed.Add(route);
-
-                if (route.To == to)
+                count++;
+            }
+            else
+            {
+                if (!(processedRoutes.Count >= hops && route.To != to))
                 {
-                    trips.Add(traversed.ToList());
-                }
-
-                var routes = Routes(route.To);
-                foreach (var subRoute in routes)
-                {
-                    Trips(subRoute, trips, to, traversed);
+                    var from = route.To;
+                    var routes = Routes(from);
+                    foreach (var r in routes)
+                    {
+                        TripCountForHops(r, to, processedRoutes, hops, ref count);
+                        processedRoutes.Remove(r);
+                    }
                 }
             }
         }
 
         #endregion
+
+        #region Trips Count For Max number of Hops 
+
+        /// <summary>
+        /// Calculates the number of trips starting at from and ending at less or than equal to maxhop number of stops.
+        /// </summary>
+        /// <param name="from">From.</param>
+        /// <param name="to">To.</param>
+        /// <param name="maxHops">The maximum allowed hops.</param>
+        /// <returns></returns>
+        public int TripCountForMaxNumberOfHops(Town from, Town to, int maxHops)
+        {
+            int count = 0;
+            var routes = Routes(from);
+            foreach (var route in routes)
+            {
+                var processedRoutes = new List<Route>();
+                TripCountForMaxNumberOfHops(route, to, processedRoutes, maxHops, ref count);
+            }
+
+            return count;
+        }
+
+        /// <summary>
+        /// Calculates the number of trips starting at from and ending at to with exactly hop number of stops.
+        /// </summary>
+        /// <param name="route">The route.</param>
+        /// <param name="to">To.</param>
+        /// <param name="processedRoutes">The processed routes.</param>
+        /// <param name="maxHops">The maxHops.</param>
+        /// <param name="count">The count.</param>
+        private void TripCountForMaxNumberOfHops(Route route, Town to, List<Route> processedRoutes, int maxHops, ref int count)
+        {
+            processedRoutes.Add(route);
+
+            if (route.To == to && maxHops >= processedRoutes.Count)
+            {
+                count++;
+            }
+            else
+            {
+                if (!(processedRoutes.Count > maxHops && route.To != to))
+                {
+                    var from = route.To;
+                    var routes = Routes(from);
+                    foreach (var r in routes)
+                    {
+                        TripCountForMaxNumberOfHops(r, to, processedRoutes, maxHops, ref count);
+                    }
+                }
+                else
+                {
+                    processedRoutes.Remove(route);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Trips Count For Max number of Hops 
+
+        
+        public int TripsCountForMaxDistance(Town from, Town to, int maxDistance)
+        {
+            int count = 0;
+            var runningSum = 0;
+            var routes = Routes(from);
+            foreach (var route in routes)
+            {
+                runningSum = 0;
+                var processedRoutes = new List<Route>();
+                TripsCountForMaxDistance(route, to, processedRoutes, maxDistance,ref runningSum, ref count);
+            }
+
+            return count;
+        }
+
+
+        private void TripsCountForMaxDistance(Route route, Town to, List<Route> processedRoutes,
+                                            int maxDistance, ref int runningSum, ref int count)
+        {
+            processedRoutes.Add(route);
+            runningSum += route.Distance;
+            if (route.To == to && runningSum < maxDistance)
+            {
+                count++;
+            }
+
+            if (!(runningSum > maxDistance))
+            {
+                var from = route.To;
+                var routes = Routes(from);
+                foreach (var r in routes)
+                {
+                    TripsCountForMaxDistance(r, to, processedRoutes, maxDistance, ref runningSum, ref count);
+                    runningSum -= r.Distance;
+                    RemoveAtLastIndex(r, processedRoutes);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Removes last occurance of an item from the list.
+        /// </summary>
+        /// <param name="route">The route.</param>
+        /// <param name="processedRoutes">The processed routes.</param>
+        private static void RemoveAtLastIndex(Route route, List<Route> processedRoutes)
+        {
+            var lastIndex = processedRoutes.IndexOf(route);
+            for (int i = processedRoutes.Count - 1; i >= 0; i--)
+            {
+                if (route == processedRoutes[i])
+                {
+                    lastIndex = i;
+                    break;
+                }
+            }
+
+            if (lastIndex >= 0 && lastIndex < processedRoutes.Count)
+            {
+                processedRoutes.RemoveAt(lastIndex);
+            }
+        }
+
+        #endregion
+
     }
 }
