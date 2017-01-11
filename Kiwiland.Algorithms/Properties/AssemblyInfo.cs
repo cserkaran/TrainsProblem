@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kiwiland.RouteTracker")]
+[assembly: AssemblyTitle("Kiwiland.Algorithms")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Kiwiland.RouteTracker")]
+[assembly: AssemblyProduct("Kiwiland.Algorithms")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("69a0b0d0-455f-4fa2-90ae-4e8b66dc18f2")]
+[assembly: Guid("d3d2983c-6562-4195-af92-0138f0dd5c6b")]
 
 // Version information for an assembly consists of the following four values:
 //

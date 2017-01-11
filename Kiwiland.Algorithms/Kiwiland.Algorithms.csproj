@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{69A0B0D0-455F-4FA2-90AE-4E8B66DC18F2}</ProjectGuid>
+    <ProjectGuid>{D3D2983C-6562-4195-AF92-0138F0DD5C6B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kiwiland.RouteTracker</RootNamespace>
-    <AssemblyName>Kiwiland.RouteTracker</AssemblyName>
+    <RootNamespace>Kiwiland.Algorithms</RootNamespace>
+    <AssemblyName>Kiwiland.Algorithms</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Binaries\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Binaries\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -40,14 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MinPQ.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DirectRoute.cs" />
-    <Compile Include="DirectRouteDistanceCalculator.cs" />
-    <Compile Include="ShortestPath.cs" />
-    <Compile Include="Station.cs" />
-    <Compile Include="StationRoutes.cs" />
-    <Compile Include="TrainRouteGraph.cs" />
+    <Compile Include="Source\MinPq.cs" />
+    <Compile Include="Source\RouteDistanceCalculator.cs" />
+    <Compile Include="Source\ShortestPath.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kiwiland.Models\Kiwiland.Models.csproj">
+      <Project>{f62e1244-9a17-4a51-9921-b95460aa3c74}</Project>
+      <Name>Kiwiland.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

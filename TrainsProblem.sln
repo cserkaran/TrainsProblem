@@ -7,9 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{80B29E1A-E2B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{963901FA-B829-45B7-892F-7BE356F60F4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiwiland.RouteTracker", "Kiwiland.RouteTracker\Kiwiland.RouteTracker.csproj", "{69A0B0D0-455F-4FA2-90AE-4E8B66DC18F2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiwiland.RouteTracker.Tests", "Kiwiland.RouteTracker.Tests\Kiwiland.RouteTracker.Tests.csproj", "{0F3E2608-B309-428D-8825-1A8C44C0ED14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiwiland.Models", "Kiwiland.Models\Kiwiland.Models.csproj", "{F62E1244-9A17-4A51-9921-B95460AA3C74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiwiland.Algorithms", "Kiwiland.Algorithms\Kiwiland.Algorithms.csproj", "{D3D2983C-6562-4195-AF92-0138F0DD5C6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,20 +19,25 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{69A0B0D0-455F-4FA2-90AE-4E8B66DC18F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69A0B0D0-455F-4FA2-90AE-4E8B66DC18F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69A0B0D0-455F-4FA2-90AE-4E8B66DC18F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69A0B0D0-455F-4FA2-90AE-4E8B66DC18F2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0F3E2608-B309-428D-8825-1A8C44C0ED14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0F3E2608-B309-428D-8825-1A8C44C0ED14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F3E2608-B309-428D-8825-1A8C44C0ED14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F3E2608-B309-428D-8825-1A8C44C0ED14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F62E1244-9A17-4A51-9921-B95460AA3C74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F62E1244-9A17-4A51-9921-B95460AA3C74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F62E1244-9A17-4A51-9921-B95460AA3C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F62E1244-9A17-4A51-9921-B95460AA3C74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3D2983C-6562-4195-AF92-0138F0DD5C6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3D2983C-6562-4195-AF92-0138F0DD5C6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3D2983C-6562-4195-AF92-0138F0DD5C6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3D2983C-6562-4195-AF92-0138F0DD5C6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{69A0B0D0-455F-4FA2-90AE-4E8B66DC18F2} = {80B29E1A-E2B5-49FB-B392-ED29C33A44DE}
 		{0F3E2608-B309-428D-8825-1A8C44C0ED14} = {963901FA-B829-45B7-892F-7BE356F60F4F}
+		{F62E1244-9A17-4A51-9921-B95460AA3C74} = {80B29E1A-E2B5-49FB-B392-ED29C33A44DE}
+		{D3D2983C-6562-4195-AF92-0138F0DD5C6B} = {80B29E1A-E2B5-49FB-B392-ED29C33A44DE}
 	EndGlobalSection
 EndGlobal

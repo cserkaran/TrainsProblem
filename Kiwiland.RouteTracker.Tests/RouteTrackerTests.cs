@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Kiwiland.Algorithms;
+using Kiwiland.Models;
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -9,66 +11,67 @@ namespace Kiwiland.RouteTracker.Tests
         [Fact]
         public void CreateTrainRouteTests()
         {
-            TrainRouteGraph graph = new TrainRouteGraph();
+            RailNetwork railNetwork = new RailNetwork();
 
-            Station A = new Station("A");
-            Station B = new Station("B");
-            Station C = new Station("C");
-            Station D = new Station("D");
-            Station E = new Station("E");
+            Town A = new Town("A");
+            Town B = new Town("B");
+            Town C = new Town("C");
+            Town D = new Town("D");
+            Town E = new Town("E");
 
             //AB5
-            graph.AddRoute(A, B, 5);
+            railNetwork.AddRoute(A, B, 5);
             // BC4,
-            graph.AddRoute(B, C, 4);
+            railNetwork.AddRoute(B, C, 4);
             //CD8
-            graph.AddRoute(C, D, 8);
+            railNetwork.AddRoute(C, D, 8);
             // DC8 
-            graph.AddRoute(D, C, 8);
+            railNetwork.AddRoute(D, C, 8);
             // DE6 
-            graph.AddRoute(D, E, 6);
+            railNetwork.AddRoute(D, E, 6);
             // AD5 
-            graph.AddRoute(A, D, 5);
+            railNetwork.AddRoute(A, D, 5);
             // CE2
-            graph.AddRoute(C, E, 2);
+            railNetwork.AddRoute(C, E, 2);
             // EB3
-            graph.AddRoute(E, B, 3);
+            railNetwork.AddRoute(E, B, 3);
             // AE7
-            graph.AddRoute(A, E, 7);
+            railNetwork.AddRoute(A, E, 7);
 
             //1.A - B - C.
-            List <Station> abc = new List<Station> { A, B, C };
-            Assert.Equal(9, DirectRouteDistanceCalculator.Distance(abc, graph));
+            List <Town> abc = new List<Town> { A, B, C };
+            Assert.Equal(9, RouteDistanceCalculator.Distance(abc, railNetwork));
 
             //2.A - D
-            List<Station> ad = new List<Station> { A, D };
-            Assert.Equal(5, DirectRouteDistanceCalculator.Distance(ad, graph));
+            List<Town> ad = new List<Town> { A, D };
+            Assert.Equal(5, RouteDistanceCalculator.Distance(ad, railNetwork));
 
             //3.A-D-C
-            List<Station> adc = new List<Station> { A, D ,C};
-            Assert.Equal(13, DirectRouteDistanceCalculator.Distance(adc, graph));
+            List<Town> adc = new List<Town> { A, D ,C};
+            Assert.Equal(13, RouteDistanceCalculator.Distance(adc, railNetwork));
 
             //4.A-E-B-C-D
-            List<Station> aebcd = new List<Station> { A, E, B, C, D };
-            Assert.Equal(22, DirectRouteDistanceCalculator.Distance(aebcd, graph));
+            List<Town> aebcd = new List<Town> { A, E, B, C, D };
+            Assert.Equal(22, RouteDistanceCalculator.Distance(aebcd, railNetwork));
 
 
             //5.A - E - D.
-            List<Station> aed = new List<Station> { A, E, D};
-            Exception ex = Assert.Throws<InvalidOperationException>(() => DirectRouteDistanceCalculator.Distance(aed, graph));
+            List<Town> aed = new List<Town> { A, E, D};
+            Exception ex = Assert.Throws<InvalidOperationException>(() => RouteDistanceCalculator.Distance(aed, railNetwork));
             Assert.Equal("NO SUCH ROUTE", ex.Message);
 
             //6.The number of trips starting at C and ending at C with a maximum of 3 stops.
          
-            var pathsToC = graph.Paths(C,C);
+            var pathsToC = railNetwork.Trips(C,C);
 
             //8.The length of the shortest route (in terms of distance to travel) from A to C.
-            ShortestPath fromA = new ShortestPath(graph, A);
+            ShortestPath fromA = new ShortestPath(railNetwork, A);
             Assert.Equal(9, fromA.DistanceTo(C));
-            var pathsFromAtoC = graph.Paths(A,C);
+
+            var pathsFromAtoC = railNetwork.Trips(A,C);
 
             //9.The length of the shortest route (in terms of distance to travel) from B to B.
-            ShortestPath fromB = new ShortestPath(graph, B);
+            ShortestPath fromB = new ShortestPath(railNetwork, B);
             Assert.Equal(9, fromB.DistanceTo(B));
 
         }

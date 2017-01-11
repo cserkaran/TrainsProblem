@@ -69,9 +69,13 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kiwiland.RouteTracker\Kiwiland.RouteTracker.csproj">
-      <Project>{69a0b0d0-455f-4fa2-90ae-4e8b66dc18f2}</Project>
-      <Name>Kiwiland.RouteTracker</Name>
+    <ProjectReference Include="..\Kiwiland.Algorithms\Kiwiland.Algorithms.csproj">
+      <Project>{d3d2983c-6562-4195-af92-0138f0dd5c6b}</Project>
+      <Name>Kiwiland.Algorithms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kiwiland.Models\Kiwiland.Models.csproj">
+      <Project>{F62E1244-9A17-4A51-9921-B95460AA3C74}</Project>
+      <Name>Kiwiland.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
