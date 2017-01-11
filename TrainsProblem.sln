@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{80B29E1A-E2B5-49FB-B392-ED29C33A44DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{963901FA-B829-45B7-892F-7BE356F60F4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiwiland.RouteTracker", "Kiwiland.RouteTracker\Kiwiland.RouteTracker.csproj", "{69A0B0D0-455F-4FA2-90AE-4E8B66DC18F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiwiland.RouteTracker.Tests", "Kiwiland.RouteTracker.Tests\Kiwiland.RouteTracker.Tests.csproj", "{0F3E2608-B309-428D-8825-1A8C44C0ED14}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69A0B0D0-455F-4FA2-90AE-4E8B66DC18F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69A0B0D0-455F-4FA2-90AE-4E8B66DC18F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69A0B0D0-455F-4FA2-90AE-4E8B66DC18F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69A0B0D0-455F-4FA2-90AE-4E8B66DC18F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F3E2608-B309-428D-8825-1A8C44C0ED14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F3E2608-B309-428D-8825-1A8C44C0ED14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F3E2608-B309-428D-8825-1A8C44C0ED14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F3E2608-B309-428D-8825-1A8C44C0ED14}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{69A0B0D0-455F-4FA2-90AE-4E8B66DC18F2} = {80B29E1A-E2B5-49FB-B392-ED29C33A44DE}
+		{0F3E2608-B309-428D-8825-1A8C44C0ED14} = {963901FA-B829-45B7-892F-7BE356F60F4F}
+	EndGlobalSection
+EndGlobal
